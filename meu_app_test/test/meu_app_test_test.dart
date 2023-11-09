@@ -33,4 +33,24 @@ void main() {
       });
     });
   });
+
+  group(
+      "Calcula o valor do produto informando valares zerados, deve gerar e erro",
+      () {
+    var valuesToTest = {
+      {'valor': 0, 'desconto': 150, 'percentual': false},
+      {'valor': 0, 'desconto': 0, 'percentual': true}
+    };
+
+    for (var value in valuesToTest) {
+      test('Entrada: $value', () {
+        expect(
+            () => calculorDesconto(
+                double.parse(value['valor'].toString()),
+                double.parse(value['desconto'].toString()),
+                value['percentual'] == true),
+            throwsA(TypeMatcher<ArgumentError>()));
+      });
+    }
+  });
 }
