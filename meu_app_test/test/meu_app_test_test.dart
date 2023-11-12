@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:meu_app_test/classes/viacep.dart';
 import 'package:meu_app_test/meu_app_test.dart';
 import 'package:test/test.dart';
 
@@ -39,7 +38,7 @@ void main() {
       () {
     var valuesToTest = {
       {'valor': 0, 'desconto': 150, 'percentual': false},
-      {'valor': 0, 'desconto': 0, 'percentual': true}
+      {'valor': 1000, 'desconto': 0, 'percentual': true}
     };
 
     for (var value in valuesToTest) {
@@ -52,5 +51,28 @@ void main() {
             throwsA(TypeMatcher<ArgumentError>()));
       });
     }
+  });
+
+  test('Testar conversão para uppercase', () {
+    expect(converToUpper("dio"), equals("DIO"));
+  });
+
+  test('Testar conversão para uppercase teste 2', () {
+    expect(converToUpper("dio"), equalsIgnoringCase("dio"));
+  });
+
+  test('comça com', () {
+    expect(converToUpper("dio"), startsWith("d"));
+  });
+
+  test('Valor diferente', () {
+    expect(retornaValor(50), isNot(equals(49)));
+  });
+
+  test('Retorna CEP', () async {
+    ViaCep viaCep = ViaCep();
+    var body = await viaCep.retornarCEP("58187000");
+    expect(body['uf'], equals('PB'));
+    expect(body['ddd'], equals('83'));
   });
 }
