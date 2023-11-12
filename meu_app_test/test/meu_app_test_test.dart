@@ -1,7 +1,12 @@
 import 'package:meu_app_test/classes/viacep.dart';
 import 'package:meu_app_test/meu_app_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
+import 'meu_app_test_test.mocks.dart';
+
+@GenerateMocks([MocikViaCep])
 void main() {
   test('Calcula o valor do produto com desconto sem porcetagem', () {
     expect(calculorDesconto(1000, 150, false), 850);
@@ -70,9 +75,12 @@ void main() {
   });
 
   test('Retorna CEP', () async {
+    //MockMocikViaCep mockMocikViaCep = MockMocikViaCep();
     ViaCep viaCep = ViaCep();
     var body = await viaCep.retornarCEP("58187000");
     expect(body['uf'], equals('PB'));
     expect(body['ddd'], equals('83'));
   });
 }
+
+class MocikViaCep extends Mock implements ViaCep {}
