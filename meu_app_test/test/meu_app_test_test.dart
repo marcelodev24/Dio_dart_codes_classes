@@ -4,8 +4,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-import 'meu_app_test_test.mocks.dart';
-
 @GenerateMocks([MocikViaCep])
 void main() {
   test('Calcula o valor do produto com desconto sem porcetagem', () {
